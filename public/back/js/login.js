@@ -54,47 +54,46 @@ $(function(){
       },
     }
   })
-})
-
-
-// 表单登录功能
-// 注册表单验证成功事件
-$('#form').on('success.form.bv',function(e){
-  e.preventDefault();
-  // 通过ajax进行提交
-  $.ajax({
-    type: 'post',
-    url: "/employee/employeeLogin",
-    data: $('#form').serialize(),
-    dataType: 'json',
-    success : function(info){
-      console.log(info);
-      if(info.success){
-        location.href = "index.html";
+  // 表单登录功能
+  // 注册表单验证成功事件
+  $('#form').on('success.form.bv',function(e){
+    e.preventDefault();
+    // 通过ajax进行提交
+    $.ajax({
+      type: 'post',
+      url: "/employee/employeeLogin",
+      data: $('#form').serialize(),
+      dataType: 'json',
+      success : function(info){
+        console.log(info);
+        if(info.success){
+          location.href = "index.html";
+        }
+        if(info.error === 1000){
+          // 用户名错误
+          // 调用插件实例方法, 更新校验状态为失败
+          // updateStatus
+          // 参数1 : 校验字段
+          // 参数2 : 校验状态 NOT_VALIDATED未校验
+          //                 VALIDATING校验中
+          //                 INVALID校验失败
+          //                 VALID成功
+          // 参数3 : 配置检验规则, 用于配置提示信息
+          $('#form').data('bootstrapValidator').updateStatus('username','INVALID','callback');
+        }
+        if(info.error === 1001){
+          $('#form').data('bootstrapValidator').updateStatus('password','INVALID','callback');
+        }
       }
-      if(info.error === 1000){
-        // 用户名错误
-        // 调用插件实例方法, 更新校验状态为失败
-        // updateStatus
-        // 参数1 : 校验字段
-        // 参数2 : 校验状态 NOT_VALIDATED未校验
-        //                 VALIDATING校验中
-        //                 INVALID校验失败
-        //                 VALID成功
-        // 参数3 : 配置检验规则, 用于配置提示信息
-        $('#form').data('bootstrapValidator').updateStatus('username','INVALID','callback');
-      }
-      if(info.error === 1001){
-        $('#form').data('bootstrapValidator').updateStatus('password','INVALID','callback');
-      }
-    }
+    })
+  })
+  
+  // 重置功能
+  $('[type="reset"]').click(function(){
+    // 调用实例方法, 重置校验状态和内容
+    // resetForm 传 ture, 内容和校验状态都重置
+    //           不穿true, 只重置校验状态
+    $('#form').data('bootstrapValidator').resetForm();
   })
 })
 
-// 重置功能
-$('[type="reset"]').click(function(){
-  // 调用实例方法, 重置校验状态和内容
-  // resetForm 传 ture, 内容和校验状态都重置
-  //           不穿true, 只重置校验状态
-  $('#form').data('bootstrapValidator').resetForm();
-})
