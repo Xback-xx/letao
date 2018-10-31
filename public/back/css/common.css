@@ -2,7 +2,7 @@ body,html {
   width: 100%;
   height: 100%;
 }
-body {
+.bodyColor {
   background-color: #222D32;
 }
 img {
@@ -135,4 +135,9 @@ ul {
 }
 #logoutModal .modal-body p{
   color: #A94442;
+}
+.lt_main .lt_content table th,
+.lt_main .lt_content table td {
+  text-align: center;
+  vertical-align: middle;
 }
