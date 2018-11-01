@@ -145,3 +145,12 @@ ul {
   vertical-align: middle;
 }
 
+.lt_content tbody img {
+  width: auto;
+  height: 50px;
+  margin: 0 auto;
+}
+#addModal img {
+  width: auto;
+  height: 100px;
+}
