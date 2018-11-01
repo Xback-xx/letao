@@ -133,7 +133,7 @@ ul {
   height: 400px;
   background-color: pink;
 }
-#logoutModal .modal-body p{
+.modal-body p{
   color: #A94442;
 }
 .lt_main .lt_content table th,
